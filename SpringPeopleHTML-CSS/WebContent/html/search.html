@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Search</title>
+<style>
+#name {
+	width: 100px;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	overflow: hidden;
+}
+</style>
+<script type="text/javascript">
+	function fnSearch() {
+		var key = document.getElementById("searchTerm").value;
+		var empObj = localStorage.getItem(key);
+		if (empObj) {
+			var emp = JSON.parse(empObj);
+			document.getElementById("name").innerText = emp.Name;
+			document.getElementById("age").innerText = emp.Age;
+			document.getElementById("exp").innerText = emp.Exp;
+		} else {
+			alert("Record not found");
+		}
+	}
+</script>
+</head>
+<body>
+	<input type="search" id="searchTerm" placeholder="name?" />
+	<button onclick="fnSearch()" type="button">Search...</button>
+	
+		<div>
+			<label> Name : </label> <span style="display: block;" id="name">This is a really
+				really really long long long name</span>
+		</div>
+
+		<div>
+			<label> Age : </label> <span id="age"></span>
+		</div>
+
+
+		<div>
+			<label> Exp : </label> <span id="exp"></span>
+		</div>
+</body>
+</html>

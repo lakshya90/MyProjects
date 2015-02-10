@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Web Sockets</title>
+<script type="text/javascript">
+var socket;
+window.onload  = function(){
+	socket = new WebSocket("ws://echo.websocket.org")
+	socket.addEventListener("open", function(){
+		console.log("Connection is open now.")
+	});
+	socket.addEventListener("close", function(){
+		console.log("Connection is closed now.")
+	});
+	socket.addEventListener("message", function(evt){
+		console.log("Message from server:" + evt.data);
+	});
+	
+	
+}
+function fnSendMessage(){
+	if(socket.readyState === WebSocket.OPEN){
+	var data = document.getElementById("message").value;
+	socket.send(data);
+}
+	else{
+		console.log("Connection is not open for sending data");
+	}
+}
+
+function fnCloseConnection(){
+	socket.close();
+}
+
+</script>
+</head>
+<body>
+<input type="text" id="message" />
+<button type="button" onclick="fnSendMessage()">Send</button>
+<button type="button" onclick="fnCloseConnection()">Close</button>
+</body>
+</html>

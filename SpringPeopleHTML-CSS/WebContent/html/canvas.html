@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Canvas</title>
+<script>
+var canvas,context=null;
+window.onload = function(){
+	canvas = document.getElementById("canvas");
+}
+function fnReset(){
+	canvas.width = canvas.width;
+}
+function fnDraw(){
+	context = canvas.getContext("2d");
+	
+	context.beginPath();
+	context.moveTo(100,110);
+	context.lineTo(200,110);
+	
+	context.strokeStyle = "red";
+	
+	
+	context.closePath();
+	context.stroke();
+}	
+
+</script>
+</head>
+<body>
+<input type="button" value="Draw" onclick="fnDraw()" />
+<input type="button" value="Reset" onclick="fnReset()" />
+<canvas style="border:2px dotted black" id="canvas" width="400" height="600" ></canvas>
+</body>
+</html>

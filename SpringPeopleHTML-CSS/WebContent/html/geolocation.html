@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Geo location</title>
+<script>
+function getLocation(){
+	var options = {
+			enableHighAccuracy : true,
+			timeout : 10000,
+			maximumAge:1000
+	}
+	navigator.geolocation.getCurrentPosition(showPositions, positionErrors, options);
+}
+function showPositions(positions){
+	var coords = positions.coords;
+	 document.getElementById("lat").value = coords.latitude;
+     document.getElementById("long").value = coords.longitude;
+     document.getElementById("acc").value = coords.accuracy;
+     document.getElementById("alt").value = coords.altitude;
+     document.getElementById("altAcc").value = coords.altitudeAccuracy;
+     document.getElementById("heading").value = coords.heading;
+     document.getElementById("mapLink").setAttribute("href",
+        "http://maps.google.com/maps?q=" + coords.latitude + ",+" +
+        coords.longitude);
+}
+function positionErrors(error){
+	var locationError = document.getElementById('locationError');
+    switch (error.code) {
+        case error.PERMISSION_DENIED:
+            locationError.innerHTML = "You have denied to share the location";
+            break;
+        case error.POSITION_UNAVAILABLE:
+            locationError.innerHTML = "Location information is unavailable";
+            break;
+        case error.TIMEOUT:
+            locationError.innerHTML = "The request to get user location timed out";
+            break;
+        case error.UNKNOWN_ERROR:
+            locationError.innerHTML = "An Unknown error has occured";
+            break;
+        default:
+            break;
+
+    }
+}
+</script>
+</head>
+<body>
+<input type="button" value="Get Location" onclick="getLocation()" />
+<div id="locationError"></div>
+  <a href="" id="mapLink" target="_blank">View Map</a>
+     <div>
+        <label for="lat">Latitude:</label>
+        <input type="text" id="lat" />
+    </div>
+ 
+     <div>
+        <label for="long">Longitude:</label>
+        <input type="text" id="long" />
+    </div>
+ 
+     <div>
+        <label for="alt">Altitude:</label>
+        <input type="text" id="alt" />
+    </div>
+ 
+     <div>
+        <label for="acc">Accuracy:</label>
+        <input type="text" id="acc" />
+    </div>
+ 
+     <div>
+        <label for="altAcc">Altitude Accuracy:</label>
+        <input type="text" id="altAcc" />
+    </div>
+ 
+     <div>
+        <label for="heading">Heading:</label>
+        <input type="text" id="heading" />
+    </div>
+</body>
+</html>

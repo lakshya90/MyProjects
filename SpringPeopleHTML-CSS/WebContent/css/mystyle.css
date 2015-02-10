@@ -1,0 +1,13 @@
+@CHARSET "ISO-8859-1";
+mark{
+    background-color:lightgreen;
+}
+
+summary {
+            background-color: lightblue;
+            color: white;
+            font-family: Verdana;
+            text-shadow: 2px 2px 2px black;
+            padding: 5px;
+        }
+        

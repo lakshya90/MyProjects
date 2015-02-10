@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>With Web Workers</title>
+<style>
+
+@-webkit-keyframes spinner{
+/* from{
+transform:rotate(0deg);
+border-bottom-color: red;
+border-top-color: blue;
+}
+to{
+transform:rotate(360deg);
+border-bottom-color: blue;
+border-top-color: red;
+} */
+
+			 0% {
+                transform: rotate(0deg);
+                border-bottom-color: red;
+                border-top-color: blue;
+            }
+ 
+            50% {
+                transform:rotate(180deg);
+                height: 50px;
+                width: 50px;
+                border-radius: 25px;
+            }
+ 
+            100% {
+                transform: rotate(360deg);
+                border-bottom-color: blue;
+                border-top-color: red;
+            }
+
+}
+.loading{
+width: 100px;
+height: 100px;
+border-radius :50px;
+border-bottom: 2px dashed red;
+border-top: 2px dashed red;
+-webkit-animation: spinner 4s infinite alternate;
+}
+</style>
+<script>
+	var worker;
+	function doOperation() {
+		var seriesLength = document.getElementById("seriesLength").value;
+
+		worker = new Worker("../scripts/worker.js");
+		worker.onmessage = messageHandler;
+		worker.onerror = errorHandler;
+		worker.postMessage(seriesLength);
+
+		/*  var log = document.getElementById("log");
+		 log.innerHTML = "";
+		 generateFibonacciSeries(seriesLength);
+		
+		 for (var i = 0; i < results.length; i++) {
+		     log.innerHTML = log.innerHTML + ("<li>" + results[i] + "</li>")
+		 } */
+	}
+
+	function messageHandler(e) {
+		var log = document.getElementById("log");
+		log.innerHTML = "";
+		for (var i = 0; i < e.data.length; i++) {
+			log.innerHTML = log.innerHTML + ("<li>" + e.data[i] + "</li>")
+		}
+
+	}
+	function errorHandler() {
+		alert("Something went wrong");
+	}
+</script>
+</head>
+<body>
+	<div class="loading"></div>
+	<input type="number" id="seriesLength" value="10" />
+	<input type="button" onclick="doOperation()" value="Generate Series" />
+	<!-- <img src="../images/ajax-loader.gif" alt="" /> -->
+	
+	<ol id="log"></ol>
+</body>
+</html>

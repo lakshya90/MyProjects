@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Canvas</title>
+<script>
+	var canvas, context = null;
+	window.onload = function() {
+		canvas = document.getElementById("canvas");
+	}
+	function fnReset() {
+		canvas.width = canvas.width;
+	}
+	function fnDraw() {
+		var scores = [ 100, 90, 85, 45, 20, 88 ];
+		var width = 50;
+		var currX = 50;
+
+		context = canvas.getContext("2d");
+		context.fillStyle = "green";
+
+		for (var i = 0; i < scores.length; i++) {
+
+			var h = scores[i];
+			if(h>=90){
+				context.fillStyle = "green";
+			}
+			if(h>30 && h<90){
+				context.fillStyle = "yellow";
+			}
+			if(h<=30){
+				context.fillStyle = "red";
+			}
+			var y = canvas.height - h;
+			context.fillRect(currX, y, width, h);
+			context.beginPath();
+			context.arc(currX+width/2,y,12,0,2*Math.PI);
+			context.lineWidth = 2;
+			context.strokeStyle = "darkblue";
+			context.fillStyle = "blue";
+			context.fill();
+			context.stroke();
+			
+			context.closePath();
+			//	context.fillRect(currX, scores[i], width,scores[i]);
+			currX += width + 10;
+		}
+		/* var emp1 = new Employee("",24,13);
+		var emp2 = new Employee("",21,5);
+		var emp3 = new Employee("",25,3); */
+	}
+
+	/* function Employee(name,age,exp){
+	 this.Name = name;
+	 this.Age = age;
+	 this.Exp = exp;
+	
+	 if(age>50)
+	 this.guy = "Old";
+	 else
+	 this.guy = "Young";
+	
+	 function getAge(){
+	
+	
+	 return { getAge : getAge, //alias : name
+	 }
+	 } */
+</script>
+</head>
+<body>
+	<input type="button" onclick="fnDraw()" value="Draw" />
+	<input type="button" value="Reset" onclick="fnReset()" />
+	<canvas style="border: 2px dotted black" id="canvas" width="400"
+		height="600"></canvas>
+</body>
+</html>

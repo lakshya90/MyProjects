@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Registration Form</title>
+<meta name="viewport" content="user-scalable=0,width=device-width, initial-scale=1, maximum-scale=1" />
+<style>
+
+body{
+background-color: lightblue;
+}
+	input{
+		border: 0px;
+		border-radius:2px;
+		padding-left: 12px;
+		width:100px;
+		margin-bottom: 5px;
+		background-color: lightblue;
+		
+	}
+	header{
+	background-color: beige;
+	width: 100%;
+	border: 3px dashed darkred;
+	text-align: center;
+	border-radius:10px;
+	margin-bottom: 10px;
+	box-shadow : 5px 5px 5px black;
+	color :white;
+	text-shadow: 2px 2px 18px darkblue;
+	letter-spacing: 2px;
+	text-transform: uppercase;
+	font-style: italic;
+	font-weight: bold;
+	
+	}
+	form{
+	font-size:15px;
+	width : 100%
+	
+	}
+	
+	.containerdiv label{
+	
+	float: left;
+	width: 10%
+	
+	}
+	aside{
+	transition : all 4s;
+	background-color: yellow;
+	opacity : 2.5;
+	padding: 1px;
+	width: 174px;
+	border : 5px solid darkblue;
+	position: fixed;
+	left: -175px;
+	color: black;
+	}
+	
+	aside:hover{
+	left: 0px;
+	opacity : 1;
+	background-color: lightgreen;
+	color: white;
+	}
+	
+	input:invalid{
+		background-color: lightpink;
+		border:2px solid darkred;
+	}
+	
+		input:valid{
+		background-color: lightgreen;
+		border:2px solid darkgreen;
+	}
+	
+	 /*  input[type='number']:valid{
+		border:3px solid green;
+	} 
+	  */
+	  
+	/* input:not([type='color']):valid{
+		background-color: lightgreen;
+	}   */
+	
+	input:valid + .invalid{
+		visibility: hidden;
+	}
+	
+	input:invalid + .invalid{
+		visibility: visible;
+	}
+	
+	 /* iPhone 4 & 5 ----------- */
+        @media only screen and (min-device-width: 320px) and (max-device-height: 568px) and (orientation : landscape) and (-webkit-device-pixel-ratio: 2) {
+            /* Styles */
+        }
+ 
+        @media only screen and (min-device-width: 320px) and (max-device-height: 568px) and (orientation : portrait) and (-webkit-device-pixel-ratio: 2) {
+         
+            header{
+                font-size:14px;
+            }
+            form{
+                font-size:10px;
+            }
+             .containerdiv label {
+                float: left;
+                width: 41%;
+            }
+ 
+            input[type='range'] {
+                width: 30%;
+            }
+ 
+            input {
+                border-radius: 2px;
+                padding-left: 2px;
+                width: 54%;
+            }
+            aside{
+                display:none;
+            }
+        }
+</style>
+<script type="text/javascript">
+
+function fnSubmit(){
+	
+	var name= document.getElementById("name").value;
+	var age= document.getElementById("age").value;
+	var experience= document.getElementById("experience").value;
+	
+	
+	var emp = new Object();
+	emp.Name=name;
+	emp.Age=age;
+	emp.Exp=experience;
+	
+	//localStorage.setItem(name,JSON.stringify(emp));
+	sessionStorage.setItem(name,JSON.stringify(emp));
+	alert("Saved...");
+	return false;  //cancel default operation of submit by saying do not go back to ther server.
+}
+function fnExpChange(){
+	
+	document. getElementById("experienceValue").value = document.getElementById("experience").value;
+	
+}
+</script>
+</head>
+<body>
+<header><h2>Employee Registration</h2></header>
+
+<aside>
+
+<ol>
+<li>Name & Age is mandatory</li>
+<li>About Us</li>
+<li>Contact Us</li>
+<li>Share this</li>
+
+</ol>
+
+
+
+
+ </aside>
+<form onsubmit="return fnSubmit()">
+<div class="containerdiv">
+<div>
+<label>Name: </label>
+<input autofocus placeholder="First & Last" id="name" name="name" required pattern="[a-zA-z]{3,30}" title="First & Lastname reqd " type="text" />
+<span class="invalid"> >3 and <30, No Special Characters</span>
+</div>
+
+
+<div>
+<label>Experience:</label>
+<input type="range" id="experience" onchange="fnExpChange()" min="0" max="30" value="2" />
+<input id="experienceValue" style="width:20px;" disabled>
+</div>
+
+<div>
+<label>Fav color:</label>
+<input type="color" value="#ffffcc" />
+</div>
+
+<div>
+<label>Age:</label>
+<input type="number" id="age" min="20" max="50" step="2" required />
+<span class="invalid"> >20 and <50</span>
+</div>
+
+
+
+<div>
+<label>Secret Question:</label>
+<input type="text" list="secretSuggestions" />
+<datalist id="secretSuggestions">
+	<option value="First school" />
+	<option value="First pet" />
+	<option value="Favourite teacher" />
+	<option value="Place of birth" />
+</datalist>
+</div>
+
+<div>
+<label>Secret Answer:</label>
+<input type="password" />
+</div>
+
+<div>
+<label>Personal Email:</label>
+<input type="email"  />
+</div>
+
+<div>
+<label>Date of Birth:</label>
+<input type="date"  />
+</div>
+
+
+<div>
+<label>Anniversary:</label>
+<input type="month"  />
+</div>
+
+<div>
+<label>Long Vacation:</label>
+<input type="week"  />
+</div>
+
+<div>
+<label>Blogsite:</label>
+<input type="url"  />
+</div>
+
+<div>
+<label>Your pic:</label>
+<input type="file"  />
+</div>
+
+
+
+
+<button type="submit"> Save</button>
+<button type="reset"> Reset</button>
+</div>
+</form>
+</body>
+</html>

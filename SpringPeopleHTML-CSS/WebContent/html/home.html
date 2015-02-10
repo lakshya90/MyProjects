@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html manifest="cache.appcache">
+<head>
+<meta charset="ISO-8859-1">
+<title>Home</title>
+<script src="../scripts/site.js"> </script>
+<link rel="stylesheet" type="text/css" href="../css/site.css" />
+<script>
+
+window.onload = function(){
+	window.applicationCache.addEventListener("updateready",function(e){
+		if(window.applicationCache.status === window.applicationCache.UPDATEREADY){
+			if(confirm("New version available. Do you want it?")){
+				window.location.reload();
+			}
+		}
+	});
+}
+
+</script>
+</head>
+<body>
+<h2>Landing Page</h2>
+<div>
+<label>Your Name:</label>
+<input id="name" placeholder="Bruce ..." />
+<button onclick="fnSayHello()">Submit</button></div>
+</body>
+</html>

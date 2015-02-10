@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Canvas</title>
+<script>
+var canvas,context=null;
+window.onload = function(){
+	canvas = document.getElementById("canvas");
+}
+function fnReset(){
+	canvas.width = canvas.width;
+}
+function fnDraw(){
+	context = canvas.getContext("2d");
+	
+	context.beginPath();
+	context.fillStyle = "rgba(0,0,500)";
+	context.fillRect(50,50,100,100);
+	
+	context.fillStyle = "rgb(0,0,500)";
+	context.fillRect(60,60,100,100);
+	
+	context.clearRectangle(105,105,20,20);
+	
+	//context.fillStyle = "blue";
+	//context.strokeStyle = "red";
+	context.closePath();
+	context.stroke();
+	context.fill();
+}	
+	
+
+</script>
+</head>
+<body>
+<input type="button" value="Draw" onclick="fnDraw()" />
+<input type="button" value="Reset" onclick="fnReset()" />
+<canvas style="border:2px dotted black" id="canvas" width="400" height="600" ></canvas>
+</body>
+</html>
